@@ -9,23 +9,28 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-import static ru.sanchellios.prog.experiments.selenium.yandex.Constants.*;
+import static ru.sanchellios.prog.experiments.selenium.Constants.*;
 
-public class SearchPage {
-    public static final String URL = "https://yandex.ru/";
+public class YandexSearchPage {
 
     private WebDriver driver;
 
     @FindBy(xpath = SEARCH_PAGE_SEARCH_INPUT_XPATH)
     private WebElement searchInput;
 
-    public SearchPage(WebDriver driver) {
+    @FindBy(xpath = SEARCH_PAGE_LOGIN_BUTTON_XPATH)
+    private WebElement loginButton;
+
+    @FindBy(id = SEARCH_PAGE_NEWS_PANEL_ID)
+    private WebElement newsPanel;
+
+    public YandexSearchPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
     public void navigate() {
-        this.driver.get(URL);
+        this.driver.get(YANDEX_URL);
     }
 
     public List<WebElement> searchFor(String searchRequest) {
@@ -34,7 +39,15 @@ public class SearchPage {
         return driver.findElements(By.xpath(SEARCH_PAGE_SEARCH_RESULT_XPATH));
     }
 
-    public void login(String login, String password) {
+    public void login(String username, String password) {
+        loginButton.click();
+        YandexSearchPage yandexSearchPage = new YandexSearchPage(driver);
+
+        yandexSearchPage.login(username, password);
+        loginButton.click();
+    }
+
+    public void getListOfNews() {
 
     }
 }

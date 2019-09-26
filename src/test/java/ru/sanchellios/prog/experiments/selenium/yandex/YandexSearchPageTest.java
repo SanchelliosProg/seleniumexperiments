@@ -12,27 +12,40 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SearchTest {
+public class YandexSearchPageTest {
     private static WebDriver driver = new ChromeDriver();
-    private SearchPage searchPage = new SearchPage(driver);
+    private YandexSearchPage yandexSearchPage = new YandexSearchPage(driver);
+    private String username = System.getProperty("yandexUsername");
+    private String password = System.getProperty("yandexPassword");
 
     @BeforeEach
     public void loadPage() {
-        searchPage.navigate();
+        yandexSearchPage.navigate();
     }
 
     @Test
     @DisplayName("Search returns 16 results")
-    public void sampleTest() {
-        List<WebElement> searchResult = searchPage.searchFor("hip-hop");
+    public void searchResultTest() {
+        List<WebElement> searchResult = yandexSearchPage.searchFor("hip-hop");
         assertEquals(16, searchResult.size());
     }
 
     @Test
+    @DisplayName("News list contains 4 static news")
+    public void staticNews4Test() {}
+
+    @Test
+    @DisplayName("News list contains inner list with 6 news")
+    public void dynamicNewsTest() {}
+
+
+    @Test
     @DisplayName("We are able to login from Search Page")
     public void searchPageLoginTest() {
-
+        yandexSearchPage.login(username, password);
     }
+
+    //TODO: Прожать все линки: Видео и т.д.
 
     @AfterAll
     public static void closeDriver() {

@@ -32,6 +32,7 @@ public class BaseWebDriverTest {
     @BeforeAll
     public static void setup() {
         driver.register(new MyListener());
+        driver.manage().window().maximize();
     }
 
     @AfterAll

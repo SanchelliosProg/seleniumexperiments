@@ -29,4 +29,5 @@ public class VariousFeaturesTest extends BaseWebDriverTest{
         WebElement element = driver.findElement(By.cssSelector("a.home-link.b-sethome"));
         assertEquals("Сделать стартовой", element.getText());
     }
+
 }
